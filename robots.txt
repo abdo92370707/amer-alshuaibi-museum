@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://abdo92370707.github.io/amer-alshuaibi-museum/sitemap.xml

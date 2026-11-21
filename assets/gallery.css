@@ -1,0 +1,45 @@
+.photo-hall {padding-bottom:clamp(3rem,7vw,6rem)}
+.photo-hall .hall-head {margin-bottom:clamp(1.6rem,3vw,2.8rem)}
+.photo-set {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(2.75rem,5.3vw,5rem) clamp(1.25rem,4.5vw,4rem)}
+.photo-item {margin:0;min-width:0}
+.photo-set a.photo-open {position:relative;display:block;color:#fff;text-decoration:none;background:#1b3028;overflow:hidden}
+.photo-open picture,.photo-open img {display:block;width:100%}
+.photo-open img {height:auto;aspect-ratio:4/3;object-fit:cover;transition:transform .45s ease}
+.photo-open:hover img {transform:scale(1.023)}
+.photo-open:focus-visible,.photo-dialog :focus-visible {outline:3px solid #a26e2a;outline-offset:4px}
+.photo-open .magnify {position:absolute;inset-inline-end:12px;bottom:12px;display:grid;place-items:center;width:44px;height:44px;border:1px solid #f5ead78c;background:#152c24dd;border-radius:50%}
+.magnify svg,.photo-controls svg {width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.photo-item figcaption {padding-top:.75rem}
+.photo-item h2 {font:700 clamp(1.65rem,3vw,2.25rem)/1.45 var(--display,Amiri,serif);margin:0 0 .17rem;color:var(--ink,#233d33)}
+.photo-item p {font-size:.93rem;line-height:1.9;color:var(--muted,#586458);margin:0;max-width:59ch}
+.photo-set .photo-item:first-child {grid-column:1/-1;display:grid;grid-template-columns:minmax(0,2.2fr) minmax(190px,1fr);align-items:center;gap:clamp(1.5rem,4vw,4rem);background:#eae4d6}
+.photo-set .photo-item:first-child picture img {aspect-ratio:1.8}
+.photo-set .photo-item:first-child figcaption {padding-block:2rem;padding-inline:0 clamp(1.4rem,3vw,3rem)}
+.photo-set .photo-item:first-child h2 {font-size:clamp(2.2rem,4.2vw,3.5rem)}
+.photo-set .photo-item:last-child:nth-child(even) {max-width:100%;grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:clamp(1.5rem,4vw,4rem)}
+.photo-records {margin-block-start:2.5rem}
+.photo-dialog {box-sizing:border-box;padding:0;width:min(1080px,calc(100% - 2rem));max-width:100%;max-height:calc(100vh - 2rem);max-height:calc(100dvh - 2rem);margin:auto;overflow:auto;overscroll-behavior:contain;border:1px solid #756951;background:#142a23;color:#fcf6e9;box-shadow:0 16px 58px #0b191776}
+.photo-dialog:not([open]) {display:none}
+.photo-dialog::backdrop {background:rgb(4 14 11 / 88%)}
+.photo-dialog-top {display:flex;align-items:center;justify-content:space-between;padding:.35rem 1rem;border-bottom:1px solid #706d5b}
+.photo-dialog-top p {margin:0;color:#eee5cf;font-size:.93rem}
+.photo-controls {display:flex;align-items:center;gap:.4rem}
+.photo-controls button {background:transparent;color:#fff7e2;border:1px solid #a19478;border-radius:2px;min-width:44px;height:44px;display:grid;place-items:center;padding:0;cursor:pointer}
+.photo-controls button:hover {background:#405246}
+.photo-dialog .lightbox-media {background:#0b1a15;display:grid;place-items:center}
+.lightbox-media img {display:block;max-width:100%;height:clamp(200px,55vh,600px);width:100%;object-fit:contain}
+.photo-details {padding:clamp(.8rem,2vw,1.5rem) clamp(1rem,3vw,2.4rem) 1.25rem}
+.photo-details h2 {font:700 clamp(1.65rem,3vw,2.4rem)/1.5 var(--display,Amiri,serif);margin:0;color:#fff6e1}
+.photo-details p {font-size:.92rem;line-height:1.7;margin:.35rem 0;color:#edeadd}
+.photo-details .photo-byline {font-size:.82rem;color:#d5cdb6}
+.photo-details a {color:#f1d495;text-underline-offset:.22em}
+@media(max-width:660px) {
+ .photo-set {grid-template-columns:1fr;gap:2.2rem}
+ .photo-open img,.photo-set .photo-item:first-child picture img {aspect-ratio:6/5}
+ .photo-set .photo-item:first-child,.photo-set .photo-item:last-child:nth-child(even) {display:block}
+ .photo-set .photo-item:first-child figcaption {padding:1rem}
+ .photo-dialog {width:calc(100% - .75rem);max-height:calc(100vh - .75rem);max-height:calc(100dvh - .75rem)}
+ .lightbox-media img {height:clamp(175px,42vh,340px)}
+ .photo-dialog-top {padding:.3rem .55rem}
+}
+@media(prefers-reduced-motion: reduce) {.photo-open img {transition:none}.photo-open:hover img {transform:none}}
