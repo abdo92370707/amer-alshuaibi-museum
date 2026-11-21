@@ -33,12 +33,14 @@
   }
 
   const audio = document.getElementById('museum-audio');
+  const guide = document.getElementById('biography-audio');
   const toggle = document.getElementById('audio-toggle');
   const state = document.getElementById('audio-state');
   const slider = document.getElementById('audio-volume');
   const volumeKey = 'amer_museum_volume';
   const passageKey = 'amer_museum_hall_passage';
   const fadeTime = 230;
+  const narrationGain = 0.18;
   let level = 16;
   let active = false;
   let fadingFrame = 0;
@@ -50,11 +52,18 @@
     if (stored !== null && /^\d{1,2}$/.test(stored)) level = Math.min(40,Number(stored));
   } catch { /* Preference storage is optional. */ }
   slider.value = level;
+  function isNarrating() {
+    return guide && !guide.paused && !guide.ended && !guide.error;
+  }
+  function targetGain() {
+    return level / 100 * (isNarrating() ? narrationGain : 1);
+  }
   function paint(notice) {
     const playing = active && !audio.paused;
     toggle.setAttribute('aria-pressed', String(playing));
     toggle.setAttribute('aria-label', playing ? 'إيقاف موسيقى المتحف' : 'تشغيل موسيقى المتحف');
-    state.textContent = notice || (playing ? (level ? 'تعمل' : 'صامتة') : 'متوقفة');
+    const playingState = !level ? 'صامتة' : isNarrating() ? 'مخفّضة' : 'تعمل';
+    state.textContent = notice || (playing ? playingState : 'متوقفة');
     document.body.classList.toggle('sound-playing',playing);
   }
   function setGain(value) {
@@ -91,11 +100,10 @@
     slider.setAttribute('aria-valuetext',level.toLocaleString('ar-OM')+' بالمئة');
   }
   function hasOtherMedia() {
-    return [...document.querySelectorAll('audio,video')].some(el => el !== audio && !el.paused && !el.ended);
+    return [...document.querySelectorAll('audio,video')].some(el => el !== audio && el !== guide && !el.paused && !el.ended);
   }
   async function play(position) {
     if (hasOtherMedia()) { paint('أوقف التسجيل أولًا'); return; }
-    document.dispatchEvent(new Event('museum:music-start'));
     const id = ++request;
     active = true;
     clearTimeout(stopTimer);
@@ -119,7 +127,7 @@
       const resume = context && context.state === 'suspended' ? context.resume() : undefined;
       await Promise.all([audio.play(),resume]);
       if (id !== request) return;
-      ramp(level/100,fadeTime);
+      ramp(targetGain(),fadeTime);
       paint();
     } catch {
       if (id !== request) return;
@@ -134,24 +142,47 @@
   slider.addEventListener('input', () => {
     level=Math.min(40,Math.max(0,Number(slider.value)));
     updateSlider();
-    ramp(level/100,0);
+    if (active) ramp(targetGain(),0);
     paint();
     try { localStorage.setItem(volumeKey,String(level)); } catch { /* Continue in memory. */ }
   });
   audio.addEventListener('playing', () => paint());
   audio.addEventListener('pause', () => paint());
   audio.addEventListener('error', () => { silence(false); paint('ملف غير متاح'); });
+  function mixNarration() {
+    // Only change the gain of music the visitor has already enabled. Never restart a paused track.
+    if (!active || document.hidden) return;
+    ramp(targetGain(), fadeTime);
+    paint();
+  }
+  if (guide) {
+    for (const change of ['pause','ended','error','emptied']) guide.addEventListener(change, mixNarration);
+  }
   document.addEventListener('play', event => {
-    if (event.target !== audio && event.target instanceof HTMLMediaElement) silence(false);
+    const media = event.target;
+    if (!(media instanceof HTMLMediaElement) || media === audio) return;
+    if (media === guide) {
+      if (hasOtherMedia() || document.hidden) guide.pause();
+      else mixNarration();
+      return;
+    }
+    silence(false);
+    if (guide && !guide.paused) guide.pause();
   },true);
-  document.addEventListener('museum:guide-start', () => silence(false));
   const recording = event => {
-    if (event.target.closest('a[href*="youtube.com/"],a[href*="youtu.be/"]')) silence(false);
+    if (event.target.closest('a[href*="youtube.com/"],a[href*="youtu.be/"]')) {
+      silence(false);
+      if (guide && !guide.paused) guide.pause();
+    }
   };
   document.addEventListener('click',recording);
   document.addEventListener('auxclick',recording);
-  document.addEventListener('visibilitychange', () => { if (document.hidden) silence(false); });
-  window.addEventListener('pagehide', () => silence(false));
+  function pausePageMedia() {
+    silence(false);
+    if (guide && !guide.paused) guide.pause();
+  }
+  document.addEventListener('visibilitychange', () => { if (document.hidden) pausePageMedia(); });
+  window.addEventListener('pagehide', pausePageMedia);
   // Carry a visitor's explicit play choice only into the exact room they just selected.
   // Direct entry, refresh, tabs opened in the background and unrelated return visits start silent.
   document.addEventListener('click',event => {
@@ -165,6 +196,7 @@
     } catch { return; }
     event.preventDefault();
     silence(true);
+    if (guide && !guide.paused) guide.pause();
     setTimeout(() => location.assign(target.href),fadeTime);
   });
   try {

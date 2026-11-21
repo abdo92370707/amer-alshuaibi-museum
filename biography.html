@@ -5,10 +5,10 @@
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/amiri-bold.woff2">
 <link rel="stylesheet" href="assets/fonts/fonts.css"><link rel="stylesheet" href="styles.css">
-<link rel="stylesheet" href="collections.css">
-<script defer src="script.js"></script>
+<link rel="stylesheet" href="collections.css?v=charon1">
+<script defer src="script.js?v=charon1"></script>
 <script defer src="collections.js"></script>
-<script defer src="assets/guide.js"></script>
+<script defer src="assets/guide.js?v=charon1"></script>
 
 <title>السيرة والبدايات | متحف الشيخ عامر الشعيبي الرقمي</title>
 <link rel="canonical" href="https://abdo92370707.github.io/amer-alshuaibi-museum/biography.html">
@@ -47,7 +47,25 @@
   <div class="col-bio-intro"><p class="kicker">قاعة السيرة</p>
     <h1 id="bio-title">سيرة الشيخ<br><em>عامر الشعيبي</em></h1>
     <p class="lead" data-guide-text>من قرية حلفا بوادي بني خالد إلى كشكاش بشرق أفريقيا، جمع الشيخ عامر بن سليمان بن خلفان الشعيبي بين الفقه والقضاء والشعر الشعبي العُماني.</p>
-    <div class="col-bio-tools"><a href="#timeline" class="col-internal">تتبّع محطات السيرة <svg class="col-glyph" aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3v14m-6-6 6 6 6-6"/></svg></a><div class="bio-guide" hidden data-guide><button type="button" data-guide-toggle aria-pressed="false">استمع إلى السيرة</button> <span role="status" data-guide-state></span></div></div>
+    <div class="col-bio-tools"><a href="#timeline" class="col-internal">تتبّع محطات السيرة <svg class="col-glyph" aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3v14m-6-6 6 6 6-6"/></svg></a></div>
+    <section class="bio-guide" id="narration" aria-labelledby="biography-audio-heading">
+      <h2 id="biography-audio-heading">استمع إلى السيرة</h2>
+      <p class="guide-voice">رواية عربية بصوت <bdi lang="en">Charon</bdi></p>
+      <audio id="biography-audio" controls preload="none" src="assets/audio/biography-charon.mp3" aria-labelledby="biography-audio-heading"><a href="assets/audio/biography-charon.mp3">فتح التسجيل الصوتي</a></audio>
+      <div class="guide-actions">
+        <button type="button" data-guide-stop hidden>إيقاف والعودة إلى البداية</button>
+        <button type="button" data-guide-retry hidden>إعادة المحاولة</button>
+        <span role="status" data-guide-state></span>
+      </div>
+      <details class="guide-transcript"><summary>نص التسجيل</summary>
+        <p>من قرية حلفا بوادي بني خالد إلى كشكاش بشرق أفريقيا، جمع الشيخ عامر بن سليمان بن خلفان الشعيبي بين الفقه والقضاء والشعر الشعبي العُماني.</p>
+        <p>وُلد في قرية حلفا، بوادي بني خالد، وتلقى علومه الأولى في محيطه العُماني. تقع حلفا في محافظة شمال الشرقية بسلطنة عُمان.</p>
+        <p>تلقى العلم على يد الشيخ عبد الله بن سعيد بن عيسى السَمَي، واشتغل بالعلوم الشرعية واللغة العربية.</p>
+        <p>تولى القضاء في كشكاش من أعمال ويتة خلال عهد السلطان حمد بن ثويني، واتصل بأوساط علمية وقضائية.</p>
+        <p>توفي في شرق أفريقيا، وبقيت قصائده وأجوبته الفقهية حاضرة في الذاكرة والدراسات اللاحقة.</p>
+        <p>صدر «ديوان الشيخ عامر بن سليمان الشعيبي» عن وزارة التراث والثقافة بمسقط، بتحقيق وتصحيح محمد بن حمد المسروري، في ١٧٢ صفحة.</p>
+      </details>
+    </section>
   </div>
   <figure class="col-bio-place"><img width="1536" height="864" src="assets/images/village-wadi-khalid.webp" srcset="assets/images/village-wadi-khalid-sm.webp 720w, assets/images/village-wadi-khalid.webp 1536w" sizes="(max-width: 720px) 92vw, 44vw" alt="مشهد معاصر للنخيل والقرية عند السفح الجبلي في وادي بني خالد" fetchpriority="high"><figcaption><span>وادي بني خالد اليوم</span><a href="credits.html">تصوير Christoph Strässler</a></figcaption></figure>
 </section>
