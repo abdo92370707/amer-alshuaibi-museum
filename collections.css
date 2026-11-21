@@ -146,8 +146,25 @@
 }
 .collection-page .col-bio-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 18px; margin-top: 14px; }
 .collection-page .col-bio-tools .col-internal { margin-top: 0; }
-.collection-page .bio-guide button {
-  min-height: 44px; padding: 4px 14px; border: 1px solid #a08d70; background: transparent; color: var(--col-forest); font: inherit; font-size: .85rem; font-weight: 700;
+/* Recorded biography and its exact reading text. */
+.collection-page .bio-guide {
+  min-width: 0; margin-top: 14px; padding: 14px 18px; background: #efeadd; border-right: 3px solid #a08555;
 }
+.collection-page .bio-guide h2 { margin: 0; font-size: 1.45rem; }
+.collection-page .guide-voice { margin: 1px 0 8px; color: var(--col-muted); font-size: .8rem; }
+.collection-page .bio-guide audio { display: block; width: 100%; min-width: 0; max-width: 100%; }
+.collection-page .guide-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 3px 12px; }
+.collection-page .guide-actions button,.collection-page .guide-transcript summary {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 2px 0; border: 0; background: transparent;
+  color: var(--col-forest); font: inherit; font-size: .85rem; font-weight: 700; text-decoration: underline; text-underline-offset: .25em;
+}
+.collection-page .guide-transcript { border-top: 1px solid var(--col-line); }
+.collection-page .guide-transcript summary { gap: 9px; }
+.collection-page .guide-transcript summary::before {
+  content: ''; display: inline-block; width: .5em; height: .5em; border-bottom: 1.5px solid; border-left: 1.5px solid;
+  transform: rotate(45deg);
+}
+.collection-page .guide-transcript[open] summary::before { transform: rotate(-45deg); }
+.collection-page .guide-transcript p { margin: 6px 0 12px; line-height: 2; font-size: .94rem; }
 .collection-page [data-guide-state] { font-size: .8rem; color: var(--col-muted); }
 .collection-page .col-glyph { flex: 0 0 16px; display: inline-block; vertical-align: middle; }
