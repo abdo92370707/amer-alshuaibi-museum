@@ -132,7 +132,11 @@ html { scroll-padding-top: calc(var(--navH) + 14px); }
 .reveal, .js-enabled .reveal:not(.visible) { opacity: 1; transform: none; }
 .reveal.visible { animation: gentle-arrival .52s ease both; }
 @keyframes gentle-arrival { from { transform: translateY(7px); } to { transform: none; } }
-html:not(.js-enabled) :is(.nav-toggle, .audio-dock, .poetry-tabs, #enter-with-sound, [data-dialog]) { display: none; }
+html:not(.js-enabled) .nav-toggle,
+html:not(.js-enabled) .audio-dock,
+html:not(.js-enabled) .poetry-tabs,
+html:not(.js-enabled) #enter-with-sound,
+html:not(.js-enabled) [data-dialog] { display: none; }
 .static-poem { text-align: center; border-top: 1px solid var(--gold); margin-top: 25px; padding-top: 15px; }
 .static-poem h3 { font-family: var(--font-display); }
 
