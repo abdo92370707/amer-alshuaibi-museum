@@ -281,3 +281,8 @@ html:not(.js-enabled) [data-dialog] { display: none; }
     .hero-buttons > * + * { margin-right: 12px; }
   }
 }
+/* On very narrow handsets the written museum name identifies the masthead. */
+@media (max-width: 355px) {
+  .brand-seal { display: none; }
+  .brand .brand-text { margin: 0; }
+}
