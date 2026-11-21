@@ -1,0 +1,31 @@
+@font-face {
+  font-family: 'Amiri';
+  src: url('amiri-regular.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Amiri';
+  src: url('amiri-bold.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Noto Sans Arabic';
+  src: url('noto-sans-arabic-regular.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Noto Sans Arabic';
+  src: url('noto-sans-arabic-bold.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
